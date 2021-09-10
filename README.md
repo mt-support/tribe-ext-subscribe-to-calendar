@@ -39,9 +39,9 @@ By default, all of these variables will be replaced by the create method from th
 * `Subscribe to Calendar` - Plugin Human-readable name, e.g. "Sample Extension"
 * `Subscribe_To_Calendar` - Which namespace we will use for the plugin. Usually the plugin name or the slug in uppercase without spaces, e.g. "SampleExtension"
 * `subscribe-to-calendar` - Uses using dashes normally, e.g. "sample-extension"
-* `__TRIBE_DOMAIN__` - Translation domain normally with "tribe-" prefix, e.g. "tec-labs-sample-extension"
+* `tec-labs-subscribe-to-calendar` - Translation domain normally with "tec-" prefix, e.g. "tec-labs-sample-extension"
 * `subscribe_to_calendar` - Uses underscores, so it's safe for variables, e.g. "sample_extension"
-* `__TRIBE_SLUG_CLEAN_ALLCAPS__` - All-caps of clean slug, e.g. "SAMPLE_EXTENSION"
+* `SUBSCRIBE_TO_CALENDAR` - All-caps of clean slug, e.g. "SAMPLE_EXTENSION"
 * `` - The URL of the extension page, by default empty. Usually "https://theeventscalendar.com/extensions/sample-extension/"
 * `1.0.0` - Version number of the extension, by default empty. Follows the "1.0.0" format
 * `` - The description of the extension, by default empty.

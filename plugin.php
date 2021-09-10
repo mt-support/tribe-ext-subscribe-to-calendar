@@ -1,15 +1,15 @@
 <?php
 /**
  * Plugin Name:       The Events Calendar Extension: Subscribe to Calendar
- * Plugin URI:        
+ * Plugin URI:
  * GitHub Plugin URI: https://github.com/mt-support/tec-labs-subscribe-to-calendar
- * Description:       
+ * Description:
  * Version:           1.0.0
  * Author:            The Events Calendar
  * Author URI:        https://evnt.is/1971
  * License:           GPL version 3 or any later version
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:       __TRIBE_DOMAIN__
+ * Text Domain:       tec-labs-subscribe-to-calendar
  *
  *     This plugin is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ function tribe_extension_subscribe_to_calendar() {
 	if ( ! class_exists( '\Tribe\Extensions\Subscribe_To_Calendar\Plugin' ) ) {
 		tribe_transient_notice(
 			'subscribe-to-calendar',
-			'<p>' . esc_html__( 'Couldn\'t properly load "The Events Calendar Extension: Subscribe to Calendar" the extension was deactivated.', '__TRIBE_DOMAIN__' ) . '</p>',
+			'<p>' . esc_html__( 'Couldn\'t properly load "The Events Calendar Extension: Subscribe to Calendar" the extension was deactivated.', 'tec-labs-subscribe-to-calendar' ) . '</p>',
 			[],
 			// 1 second after that make sure the transient is removed.
 			1
