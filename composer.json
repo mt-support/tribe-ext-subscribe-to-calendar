@@ -1,0 +1,41 @@
+{
+  "require-dev": {
+    "bordoni/phpass": "dev-main",
+    "codeception/module-asserts": "^1.0",
+    "codeception/module-cli": "^1.0",
+    "codeception/module-db": "^1.0",
+    "codeception/module-filesystem": "^1.0",
+    "codeception/module-phpbrowser": "^1.0",
+    "codeception/module-rest": "^1.0",
+    "codeception/module-webdriver": "^1.0",
+    "codeception/util-universalframework": "^1.0",
+    "lucatume/function-mocker": "^1.0",
+    "lucatume/wp-browser": "^2.6.17",
+    "the-events-calendar/tribalscents": "dev-master",
+    "the-events-calendar/tec-testing-facilities": "dev-master",
+    "phpunit/phpunit": "~6.0",
+    "vlucas/phpdotenv": "^4.1",
+    "automattic/vipwpcs": "^2.0",
+    "wp-coding-standards/wpcs": "^2.1"
+  },
+  "repositories": [
+    {
+      "name": "the-events-calendar/TribalScents",
+      "type": "github",
+      "url": "https://github.com/the-events-calendar/TribalScents",
+      "no-api": true
+    },
+    {
+      "name": "the-events-calendar/tec-testing-facilities",
+      "type": "github",
+      "url": "https://github.com/the-events-calendar/tec-testing-facilities",
+      "no-api": true
+    },
+    {
+      "name": "bordoni/phpass",
+      "type": "github",
+      "url": "https://github.com/bordoni/phpass",
+      "no-api": true
+    }
+  ]
+}

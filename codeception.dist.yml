@@ -1,0 +1,28 @@
+actor: Tester
+paths:
+    tests: tests
+    log: tests/_output
+    data: tests/_data
+    helpers: tests/_support
+    wp_root: "%WP_ROOT_FOLDER%"
+bootstrap: _bootstrap.php
+settings:
+    colors: true
+    memory_limit: 1024M
+params:
+  - .env
+extensions:
+    commands:
+        - 'Codeception\Command\GenerateWPUnit'
+        - 'Codeception\Command\GenerateWPRestApi'
+        - 'Codeception\Command\GenerateWPRestController'
+        - 'Codeception\Command\GenerateWPRestPostTypeController'
+        - 'Codeception\Command\GenerateWPAjax'
+        - 'Codeception\Command\GenerateWPCanonical'
+        - 'Codeception\Command\GenerateWPXMLRPC'
+    enabled:
+      - Tribe\Test\Codeception\Extensions\Function_Mocker
+    config:
+      Tribe\Test\Codeception\Extensions\Function_Mocker:
+        suites: [ 'wpunit' ]
+        initFile: tests/_function-mocker-bootstrap.php

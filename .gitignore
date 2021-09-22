@@ -1,0 +1,9 @@
+vendor
+
+*.swp
+
+codeception.yml
+.env*.local
+
+tests/*.suite.yml
+tests/_output
