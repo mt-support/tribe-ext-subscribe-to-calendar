@@ -68,7 +68,8 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 * Load text domain for localization of the plugin.
 	 *
 	 * @since 1.0.0
-	 */ public function load_text_domains() {
+	 */
+	public function load_text_domains() {
 		$mopath = tribe( Plugin::class )->plugin_dir . 'lang/';
 		$domain = 'tec-labs-subscribe-to-calendar';
 
@@ -79,7 +80,16 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	/**
 	 * Add iCal feed template overrides.
 	 *
+	 * We're mainly interested in ical-link.php template here.
+	 *
+	 * @see `tribe_template_path_list` filter.
+	 *
 	 * @since 1.0.0
+	 *
+	 * @param array $folders An array of the current folders.
+	 * @param \Tribe__Template $template The current template requested.
+	 *
+	 * @return array The filtered template locations.
 	 */
 	public function template_locations( $folders, \Tribe__Template $template ) {
 		$path = array_merge(
@@ -92,29 +102,52 @@ class Hooks extends \tad_DI52_ServiceProvider {
 			'priority' => 5,
 			'path'     => $path,
 		];
+
 		return $folders;
 	}
 
 	/**
-	 * Add iCal feed link labels and URIs.
+	 * Add iCal feed link labels and URIs to the global template vars.
+	 *
+	 * Usable in ical-link.php via the $subscribe_links global.
+	 *
+	 * @see `tribe_events_views_v2_view_template_vars` filter.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param array $template_vars The vars.
+	 * @param \Tribe\Events\Views\V2\View $view The View implementation.
+	 *
+	 * @return array The filtered template variables.
 	 */
 	public function template_vars( $template_vars, \Tribe\Events\Views\V2\View $view ) {
+		$subscribe_to_calendar = tribe( 'extension.subscribe_to_calendar' );
+
 		$template_vars['subscribe_links'] = [
 			[
 				'label' => __( 'Google Calendar', 'tec-labs-subscribe-to-calendar' ),
-				'uri'   => 'https://link',
+				'uri'   => $subscribe_to_calendar->get_gcal_uri(),
 			],
 			[
 				'label' => __( 'iCalendar', 'tec-labs-subscribe-to-calendar' ),
-				'uri'   => 'https://link',
-			],
-			[
-				'label' => __( 'Download as .ICS', 'tec-labs-subscribe-to-calendar' ),
-				'uri'   => 'https://link',
+				'uri'   => $subscribe_to_calendar->get_ical_uri(),
 			],
 		];
+
+		/**
+		 * Add the .ics legacy export link.
+		 *
+		 * This is controlled by the default iCal_Data trait.
+		 *
+		 * @see Tribe\Events\Views\V2\Views\Traits\iCal_Data
+		 */
+		if ( isset( $template_vars['ical'] ) && $template_vars['ical']->display_link ) {
+			$template_vars['subscribe_links'][] = [
+				'label' => __( 'Download as .ICS', 'tec-labs-subscribe-to-calendar' ),
+				'uri'   => $template_vars['ical']->link->url,
+			];
+		}
+
 		return $template_vars;
 	}
 }

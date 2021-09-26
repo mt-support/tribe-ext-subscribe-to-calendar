@@ -89,12 +89,6 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			return;
 		}
 
-		// Start binds.
-
-
-
-		// End binds.
-
 		$this->container->register( Hooks::class );
 		$this->container->register( Assets::class );
 	}
@@ -122,6 +116,31 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		$plugin_register->register_plugin();
 
 		$this->container->singleton( Plugin_Register::class, $plugin_register );
-		$this->container->singleton( 'extension.subscribe_to_calendar', $plugin_register );
+		$this->container->singleton( 'extension.subscribe_to_calendar.register', $plugin_register );
+	}
+
+	/**
+	 * Retrieve the Google Calendar URI.
+	 *
+	 * Clicking this link will open up Google Calendar.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string The Google Calendar URI.
+	 */
+	public function get_gcal_uri() {
+	}
+
+	/**
+	 * Retrieve the iCalendar URI.
+	 *
+	 * Clicking this link will open up the default iCalendar
+	 * handler. Might open Google Calendar in some cases.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string The iCalendar URI.
+	 */
+	public function get_ical_uri() {
 	}
 }
