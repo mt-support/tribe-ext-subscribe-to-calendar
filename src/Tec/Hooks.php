@@ -60,19 +60,61 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 * @since 1.0.0
 	 */
 	protected function add_filters() {
-
+		add_filter( 'tribe_template_path_list', [ $this, 'template_locations' ], 10, 2 );
+		add_filter( 'tribe_events_views_v2_view_template_vars', [ $this, 'template_vars' ], 10, 2 );
 	}
 
 	/**
 	 * Load text domain for localization of the plugin.
 	 *
 	 * @since 1.0.0
-	 */
-	public function load_text_domains() {
+	 */ public function load_text_domains() {
 		$mopath = tribe( Plugin::class )->plugin_dir . 'lang/';
 		$domain = 'tec-labs-subscribe-to-calendar';
 
 		// This will load `wp-content/languages/plugins` files first.
 		Common::instance()->load_text_domain( $domain, $mopath );
+	}
+
+	/**
+	 * Add iCal feed template overrides.
+	 *
+	 * @since 1.0.0
+	 */
+	public function template_locations( $folders, \Tribe__Template $template ) {
+		$path = array_merge(
+			(array) dirname( Plugin::FILE ),
+			$template->get_template_folder()
+		);
+
+		$folders[ Plugin::SLUG ] = [
+			'id'       => Plugin::SLUG,
+			'priority' => 5,
+			'path'     => $path,
+		];
+		return $folders;
+	}
+
+	/**
+	 * Add iCal feed link labels and URIs.
+	 *
+	 * @since 1.0.0
+	 */
+	public function template_vars( $template_vars, \Tribe\Events\Views\V2\View $view ) {
+		$template_vars['subscribe_links'] = [
+			[
+				'label' => __( 'Google Calendar', 'tec-labs-subscribe-to-calendar' ),
+				'uri'   => 'https://link',
+			],
+			[
+				'label' => __( 'iCalendar', 'tec-labs-subscribe-to-calendar' ),
+				'uri'   => 'https://link',
+			],
+			[
+				'label' => __( 'Download as .ICS', 'tec-labs-subscribe-to-calendar' ),
+				'uri'   => 'https://link',
+			],
+		];
+		return $template_vars;
 	}
 }
