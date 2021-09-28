@@ -120,15 +120,66 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	}
 
 	/**
+	 * Retrieve the iCal Feed URL with current context parameters.
+	 *
+	 * Both iCal and gCal URIs can be built from the Feed URL which simply
+	 * points to a canonical URL that the generator can parse
+	 * via `tribe_get_global_query_object` and spew out results in the
+	 * ICS format.
+	 *
+	 * This is exactly what \Tribe__Events__iCal::do_ical_template does
+	 * and lets it generate from a less vague and a more context-bound URL
+	 * for more granular functionality. This lets us have shortcode support
+	 * among other things.
+	 *
+	 * We strip some of the things that we don't need for subscriptions
+	 * like end dates, view types, etc., ignores pagination and always returns
+	 * fresh future events. Subsciptions to past events is pointless.
+	 *
+	 * The URL generated is also inert to the Permalink and Rewrite Rule settings
+	 * in WordPress, so will work out of the box on any website, even if
+	 * the settings are changes or break.
+	 *
+	 * @param \Tribe\Events\Views\V2\View $view The View we're being called from.
+	 *
+	 * @return string The iCal Feed URI.
+	 */
+	private function get_canonical_ics_feed_url( \Tribe\Events\Views\V2\View $view ) {
+		$view_url_args = $view->get_url_args();
+
+		// Clean query params to only contain canonical arguments.
+		$canonical_args = [ 'post_type', 'tribe_events_cat' ];
+
+		foreach ( $view_url_args as $arg => $value ) {
+			if ( ! in_array( $arg, $canonical_args, true ) ) {
+				unset( $view_url_args[ $arg ] );
+			}
+		}
+
+		$view_url_args['tribe-bar-date'] = date( 'Y-m-d' ); // Subscribe from today.
+		$view_url_args['ical'] = 1; // iCalenarize.
+
+		return add_query_arg( urlencode_deep( $view_url_args ), home_url( '/' ) );
+	}
+
+	/**
 	 * Retrieve the Google Calendar URI.
 	 *
 	 * Clicking this link will open up Google Calendar.
 	 *
 	 * @since 1.0.0
 	 *
+	 * @param \Tribe\Events\Views\V2\View $view The View we're being called from.
+	 *
 	 * @return string The Google Calendar URI.
 	 */
-	public function get_gcal_uri() {
+	public function get_gcal_uri( \Tribe\Events\Views\V2\View $view ) {
+		$canonical_ics_feed_url = $this->get_canonical_ics_feed_url( $view );
+
+		return add_query_arg(
+			[ 'cid' => urlencode( $canonical_ics_feed_url ) ],
+			'https://www.google.com/calendar/render?cid='
+		);
 	}
 
 	/**
@@ -139,8 +190,13 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 *
 	 * @since 1.0.0
 	 *
+	 * @param \Tribe\Events\Views\V2\View $view The View we're being called from.
+	 *
 	 * @return string The iCalendar URI.
 	 */
-	public function get_ical_uri() {
+	public function get_ical_uri( \Tribe\Events\Views\V2\View $view ) {
+		$canonical_ics_feed_url = $this->get_canonical_ics_feed_url( $view );
+		
+		return str_replace( [ 'http://', 'https://' ], 'webcal://', $canonical_ics_feed_url );
 	}
 }

@@ -126,11 +126,11 @@ class Hooks extends \tad_DI52_ServiceProvider {
 		$template_vars['subscribe_links'] = [
 			[
 				'label' => __( 'Google Calendar', 'tec-labs-subscribe-to-calendar' ),
-				'uri'   => $subscribe_to_calendar->get_gcal_uri(),
+				'uri'   => $subscribe_to_calendar->get_gcal_uri( $view ),
 			],
 			[
 				'label' => __( 'iCalendar', 'tec-labs-subscribe-to-calendar' ),
-				'uri'   => $subscribe_to_calendar->get_ical_uri(),
+				'uri'   => $subscribe_to_calendar->get_ical_uri( $view ),
 			],
 		];
 
