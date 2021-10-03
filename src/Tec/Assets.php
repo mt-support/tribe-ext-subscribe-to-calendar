@@ -34,5 +34,24 @@ class Assets extends \tad_DI52_ServiceProvider {
 
 		$plugin = tribe( Plugin::class );
 
+		tribe_asset(
+			$plugin,
+			'tribe-ext-subscribe-to-calendar-css',
+			'tribe-ext-subscribe-to-calendar.css',
+			[],
+			'wp_enqueue_scripts',
+			[]
+		);
+
+		tribe_asset(
+			$plugin,
+			'tribe-ext-subscribe-to-calendar',
+			'tribe-ext-subscribe-to-calendar.js',
+			[],
+			'wp_enqueue_scripts',
+			[
+				'in_footer' => true,
+			]
+		);
 	}
 }
