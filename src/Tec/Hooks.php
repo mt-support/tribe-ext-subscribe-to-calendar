@@ -62,6 +62,7 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	protected function add_filters() {
 		add_filter( 'tribe_template_path_list', [ $this, 'template_locations' ], 10, 2 );
 		add_filter( 'tribe_events_views_v2_view_template_vars', [ $this, 'template_vars' ], 10, 2 );
+		add_filter( 'tribe_ical_properties', [ $this, 'ical_properties' ] );
 	}
 
 	/**
@@ -149,5 +150,24 @@ class Hooks extends \tad_DI52_ServiceProvider {
 		}
 
 		return $template_vars;
+	}
+
+	/**
+	 * Add iCal REFRESH and TTL headers.
+	 *
+	 * Some clients may ignore these refresh headers.
+	 * https://support.google.com/calendar/answer/37100?hl=en&ref_topic=1672445
+	 *
+	 * @see `tribe_ical_properties` filter.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $content The iCal content.
+	 *
+	 * @return string The filtered content.
+	 */
+	public function ical_properties( $content ) {
+		$content .= "REFRESH-INTERVAL;VALUE=DURATION:PT1H\r\n";
+		return $content . "X-PUBLISHED-TTL:PT1H\r\n";
 	}
 }
