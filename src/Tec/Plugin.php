@@ -144,7 +144,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 *
 	 * @return string The iCal Feed URI.
 	 */
-	private function get_canonical_ics_feed_url( \Tribe\Events\Views\V2\View $view ) {
+	public function get_canonical_ics_feed_url( \Tribe\Events\Views\V2\View $view ) {
 		$view_url_args = $view->get_url_args();
 
 		// Clean query params to only contain canonical arguments.
@@ -187,6 +187,9 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 *
 	 * Clicking this link will open up the default iCalendar
 	 * handler. Might open Google Calendar in some cases.
+	 *
+	 * The initial request will go out over HTTP, then switched to HTTPs by the
+	 * server. There's no webcals://-based scheme that's officially supported.
 	 *
 	 * @since 1.0.0
 	 *
