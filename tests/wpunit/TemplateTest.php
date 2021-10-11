@@ -49,7 +49,7 @@ class TemplateTest extends \Codeception\TestCase\WPTestCase {
 
 		$this->assertNotContains(
 			'Download as .ICS',
-			wp_list_pluck( $view->get_template_vars()['subscribe_links'], 'label' ),
+			wp_list_pluck( $view->get_template_vars()['subscribe_links'], 'label' )
 		);
 	}
 
