@@ -1,18 +1,15 @@
-.tribe-events .tribe-events-c-events-bar__dropdown,
-.tribe-events-single .tribe-events-c-events-bar__dropdown {
-	margin: var(--tec-spacer-7) auto;
+.subscribe-to-calendar-dropdown {
+	margin: var(--tec-spacer-7) auto !important;
 	position: relative;
 	display: flex;
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-selector {
 	margin-left: auto;
 	position: relative;
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__button,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__button {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-selector-button {
 	outline: none;
 	width: auto;
 	font-family: var(--tec-font-family-sans-serif);
@@ -35,13 +32,11 @@
 	padding: 11px 20px;
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__button:hover,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__button:hover {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-selector-button:hover {
 	background-color: var(--tec-color-button-primary-hover) !important;
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__button .tribe-common-c-svgicon,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__button .tribe-common-c-svgicon {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-svgicon {
 	color: var(--tec-color-background);
 	display: inline-block;
 	height: 6px;
@@ -50,18 +45,15 @@
 	vertical-align: middle;
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__button--active .tribe-common-c-svgicon,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__button--active .tribe-common-c-svgicon {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-selector-button-active .subscribe-to-calendar-dropdown-svgicon {
 	transform: rotate(180deg);
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__button .tribe-common-c-svgicon .tribe-common-c-svgicon__svg-fill,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__button .tribe-common-c-svgicon .tribe-common-c-svgicon__svg-fill {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-svgicon .subscribe-to-calendar-dropdown-svgicon-fill {
 	fill: var(--tec-color-background);
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-selector-content {
 	display: none;
 	box-shadow: var(--tec-box-shadow-default);
 	right: 0;
@@ -76,20 +68,17 @@
 	z-index: var(--tec-z-index-dropdown);
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content ul,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content ul {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-selector-content .subscribe-to-calendar-dropdown-selector-list {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content ul li.tribe-events-c-dropdown-selector__list-item:hover,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content ul li.tribe-events-c-dropdown-selector__list-item:hover {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-selector-content .subscribe-to-calendar-dropdown-selector-list .subscribe-to-calendar-dropdown-selector-list-item:hover {
 	background-color: var(--tec-color-background-secondary);
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content ul li a.tribe-events-c-dropdown-selector__list-item-link,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content ul li a.tribe-events-c-dropdown-selector__list-item-link {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-selector-content .subscribe-to-calendar-dropdown-selector-list .subscribe-to-calendar-dropdown-selector-list-item .subscribe-to-calendar-dropdown-selector-list-item-link {
 	padding: var(--tec-spacer-0) var(--tec-spacer-7) var(--tec-spacer-0) var(--tec-spacer-3);
 	border-radius: var(--tec-border-radius-default);
 	color: var(--tec-color-text-primary);
@@ -99,8 +88,7 @@
 	text-decoration: none;
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content ul li a span.tribe-events-c-dropdown-selector__list-item-text,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content ul li a span.tribe-events-c-dropdown-selector__list-item-text {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-selector-content .subscribe-to-calendar-dropdown-selector-list .subscribe-to-calendar-dropdown-selector-list-item .subscribe-to-calendar-dropdown-selector-list-item-link .subscribe-to-calendar-dropdown-selector-list-item-text {
 	font-family: var(--tec-font-family-sans-serif);
 	font-size: var(--tec-font-size-2);
 	line-height: var(--tec-line-height-3);
@@ -108,7 +96,6 @@
 	color: var(--tec-color-text-primary);
 }
 
-.tribe-events .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content ul li.tribe-events-c-dropdown-selector__list-item:hover a span.tribe-events-c-dropdown-selector__list-item-text,
-.tribe-events-single .tribe-events-c-events-bar__dropdown .tribe-events-c-dropdown-selector__content ul li.tribe-events-c-dropdown-selector__list-item:hover a span.tribe-events-c-dropdown-selector__list-item-text  {
+.subscribe-to-calendar-dropdown .subscribe-to-calendar-dropdown-selector-content .subscribe-to-calendar-dropdown-selector-list .subscribe-to-calendar-dropdown-selector-list-item:hover .subscribe-to-calendar-dropdown-selector-list-item-link .subscribe-to-calendar-dropdown-selector-list-item-text {
 	font-weight: 700;
 }

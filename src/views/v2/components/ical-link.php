@@ -15,38 +15,30 @@
  *
  * @package Tribe\Extensions\Subscribe_To_Calendar
  */
+
 ?>
-<div class="tribe-events-c-events-bar__dropdown">
-    <div class="tribe-events-c-dropdown-selector" data-js="tribe-events-dropdown-selector">
-	<button
-	    class="tribe-common-c-btn tribe-events-c-dropdown-selector__button"
-	    data-js="tribe-events-dropdown-selector-button"
-	>
-	    <span class="tribe-events-c-dropdown-selector__button-text">
-		<?php echo esc_html__( 'Subscribe to calendar', 'the-events-calendar' ); ?>
-	    </span>
-	    <svg class="tribe-common-c-svgicon tribe-common-c-svgicon--caret-down" viewBox="0 0 10 7" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.008.609L5 4.6 8.992.61l.958.958L5 6.517.05 1.566l.958-.958z" class="tribe-common-c-svgicon__svg-fill"/></svg>
-	</button>
-	<div
-	    class="tribe-events-c-dropdown-selector__content"
-	    id="tribe-events-dropdown-selector-content"
-	    data-js="tribe-events-dropdown-selector-list-container"
-	>
-	    <ul class="tribe-events-c-dropdown-selector__list">
-		<?php foreach ( $subscribe_links as $link ) : ?>
-		    <li class="tribe-events-c-dropdown-selector__list-item">
-			<a
-			    href="<?php echo esc_url( $link['uri'] ); ?>"
-			    class="tribe-events-c-dropdown-selector__list-item-link"
-			    data-js="tribe-events-dropdown-link"
-			>
-			    <span class="tribe-events-c-dropdown-selector__list-item-text">
-				<?php echo esc_html( $link['label'] ); ?>
-			    </span>
-			</a>
-		    </li>
-		<?php endforeach; ?>
-	    </ul>
+<div class="subscribe-to-calendar-dropdown">
+	<div class="subscribe-to-calendar-dropdown-selector">
+		<button class="subscribe-to-calendar-dropdown-selector-button">
+			<span class="subscribe-to-calendar-dropdown-selector-button-text">
+				<?php echo esc_html__( 'Subscribe to calendar', 'the-events-calendar' ); ?>
+			</span>
+			<svg class="subscribe-to-calendar-dropdown-svgicon subscribe-to-calendar-dropdown-svgicon-caret-down" viewBox="0 0 10 7" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M1.008.609L5 4.6 8.992.61l.958.958L5 6.517.05 1.566l.958-.958z" class="subscribe-to-calendar-dropdown-svgicon-fill"/>
+			</svg>
+		</button>
+		<div class="subscribe-to-calendar-dropdown-selector-content">
+			<ul class="subscribe-to-calendar-dropdown-selector-list">
+				<?php foreach ( $subscribe_links as $subscribe_link ) : ?>
+					<li class="subscribe-to-calendar-dropdown-selector-list-item">
+						<a href="<?php echo esc_url( $subscribe_link['uri'] ); ?>"class="subscribe-to-calendar-dropdown-selector-list-item-link">
+							<span class="subscribe-to-calendar-dropdown-selector-list-item-text">
+								<?php echo esc_html( $subscribe_link['label'] ); ?>
+							</span>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
 	</div>
-    </div>
 </div>
