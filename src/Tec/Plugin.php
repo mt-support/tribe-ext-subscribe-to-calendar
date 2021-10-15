@@ -157,7 +157,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		}
 
 		$view_url_args['tribe-bar-date'] = date( 'Y-m-d' ); // Subscribe from today.
-		$view_url_args['ical'] = 1; // iCalenarize.
+		$view_url_args['ical'] = 1; // iCalendarize.
 
 		return add_query_arg( urlencode_deep( $view_url_args ), home_url( '/' ) );
 	}
@@ -199,7 +199,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 */
 	public function get_ical_uri( \Tribe\Events\Views\V2\View $view ) {
 		$canonical_ics_feed_url = $this->get_canonical_ics_feed_url( $view );
-		
+
 		return str_replace( [ 'http://', 'https://' ], 'webcal://', $canonical_ics_feed_url );
 	}
 }
