@@ -38,4 +38,21 @@ class URITest extends \Codeception\TestCase\WPTestCase {
 
 		$this->assertEquals( $expected, $subscribe_to_calendar->get_gcal_uri( $view ) );
 	}
+
+	/**
+	 * @test
+	 * both URIs should be overridable by single_ical_link View context
+	 */
+	public function single_ical_link_should_passthru_via_context() {
+		tribe_register_provider( Views\Service_Provider::class );
+
+		$view = Views\View::make( Views\View::class, tribe_context()->alter( [
+			'single_ical_link' => $link = 'http://random.org'
+		] ) );
+
+		$subscribe_to_calendar = tribe( 'extension.subscribe_to_calendar' );
+
+		$this->assertEquals( 'webcal://random.org', $subscribe_to_calendar->get_ical_uri( $view ) );
+		$this->assertEquals( 'https://www.google.com/calendar/render?cid=http%3A%2F%2Frandom.org', $subscribe_to_calendar->get_gcal_uri( $view ) );
+	}
 }
