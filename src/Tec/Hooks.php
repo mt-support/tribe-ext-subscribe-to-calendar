@@ -62,6 +62,7 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	protected function add_filters() {
 		add_filter( 'tribe_template_path_list', [ $this, 'template_locations' ], 10, 2 );
 		add_filter( 'tribe_events_views_v2_view_template_vars', [ $this, 'template_vars' ], 10, 2 );
+		add_filter( 'tribe_events_ical_single_event_links', [ $this, 'single_event_links' ], 11 );
 		add_filter( 'tribe_ical_properties', [ $this, 'ical_properties' ] );
 	}
 
@@ -150,6 +151,46 @@ class Hooks extends \tad_DI52_ServiceProvider {
 		}
 
 		return $template_vars;
+	}
+
+	/**
+	 * Replace the default single event links with subsciption links.
+	 *
+	 * As single calendars are not really a View\V2\View we have to emulate one.
+	 * We use `tribe_get_single_ical_link` to figure out what the feed URI
+	 * should be for this pseudo-View.
+	 * Fun.
+	 *
+	 * @see `tribe_events_ical_single_event_links` filter.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $calendar_links The link content.
+	 *
+	 * @return string The altered link content.
+	 */
+	public function single_event_links( $calendar_links ) {
+		$single_ical_link = tribe_get_single_ical_link();
+		$subscribe_to_calendar = tribe( 'extension.subscribe_to_calendar' );
+
+		$view = new class extends \Tribe\Events\Views\V2\View {
+		};
+		$view->set_url( [] );
+		$view->set_context( tribe_context()->alter( [
+			'single_ical_link' => $single_ical_link,
+		] ) );
+
+		$labels = [
+			'gcal' => __( 'Subscribe via Google Calendar', 'tec-labs-subscribe-to-calendar' ),
+			'ical' => __( 'Subscribe via iCalendar', 'tec-labs-subscribe-to-calendar' ),
+		];
+
+		$calendar_links = '<div class="tribe-events-cal-links">';
+		$calendar_links .= '<a class="tribe-events-gcal tribe-events-button" href="' . esc_url( $subscribe_to_calendar->get_gcal_uri( $view ) ) . '" title="' . esc_attr( $labels['gcal'] ) . '">+ ' . esc_html( $labels['gcal'] ) . '</a>';
+		$calendar_links .= '<a class="tribe-events-ical tribe-events-button" href="' . esc_url( $subscribe_to_calendar->get_ical_uri( $view ) ) . '" title="' . esc_attr( $labels['ical'] ) . '" >+ ' . esc_html( $labels['ical'] ) . '</a>';
+		$calendar_links .= '</div><!-- .tribe-events-cal-links -->';
+
+		return $calendar_links;
 	}
 
 	/**

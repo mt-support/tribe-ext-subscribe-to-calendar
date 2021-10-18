@@ -145,6 +145,15 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 * @return string The iCal Feed URI.
 	 */
 	public function get_canonical_ics_feed_url( \Tribe\Events\Views\V2\View $view ) {
+		if ( $single_ical_link = $view->get_context()->get( 'single_ical_link' ) ) {
+			/**
+			 * This is not really canonical. As single event views are not actually
+			 * Views\V2\View instances we pass them out as is. A lot of extra fundamental
+			 * things need to happen before we can actually canonicalize single iCals links.
+			 */
+			return $single_ical_link;
+		}
+
 		$view_url_args = $view->get_url_args();
 
 		// Clean query params to only contain canonical arguments.
