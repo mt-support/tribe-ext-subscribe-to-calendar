@@ -186,7 +186,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		$canonical_ics_feed_url = $this->get_canonical_ics_feed_url( $view );
 
 		return add_query_arg(
-			[ 'cid' => urlencode( $canonical_ics_feed_url ) ],
+			[ 'cid' => urlencode( $this->get_ical_uri( $view ) ) ],
 			'https://www.google.com/calendar/render?cid='
 		);
 	}

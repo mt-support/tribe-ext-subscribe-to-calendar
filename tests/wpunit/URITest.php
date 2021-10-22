@@ -32,7 +32,7 @@ class URITest extends \Codeception\TestCase\WPTestCase {
 		$subscribe_to_calendar = tribe( 'extension.subscribe_to_calendar' );
 
 		$expected = add_query_arg(
-			[ 'cid' => urlencode( $subscribe_to_calendar->get_canonical_ics_feed_url( $view ) ) ],
+			[ 'cid' => urlencode( preg_replace( '#https?://#', 'webcal://', $subscribe_to_calendar->get_canonical_ics_feed_url( $view ) ) ) ],
 			'https://www.google.com/calendar/render'
 		);
 
@@ -53,6 +53,6 @@ class URITest extends \Codeception\TestCase\WPTestCase {
 		$subscribe_to_calendar = tribe( 'extension.subscribe_to_calendar' );
 
 		$this->assertEquals( 'webcal://random.org', $subscribe_to_calendar->get_ical_uri( $view ) );
-		$this->assertEquals( 'https://www.google.com/calendar/render?cid=http%3A%2F%2Frandom.org', $subscribe_to_calendar->get_gcal_uri( $view ) );
+		$this->assertEquals( 'https://www.google.com/calendar/render?cid=webcal%3A%2F%2Frandom.org', $subscribe_to_calendar->get_gcal_uri( $view ) );
 	}
 }
