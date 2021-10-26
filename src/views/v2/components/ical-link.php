@@ -31,7 +31,7 @@
 			<ul class="subscribe-to-calendar-dropdown-selector-list">
 				<?php foreach ( $subscribe_links as $subscribe_link ) : ?>
 					<li class="subscribe-to-calendar-dropdown-selector-list-item">
-						<a href="<?php echo esc_url( $subscribe_link['uri'] ); ?>"class="subscribe-to-calendar-dropdown-selector-list-item-link">
+						<a target="_blank" href="<?php echo esc_url( $subscribe_link['uri'] ); ?>" class="subscribe-to-calendar-dropdown-selector-list-item-link">
 							<span class="subscribe-to-calendar-dropdown-selector-list-item-text">
 								<?php echo esc_html( $subscribe_link['label'] ); ?>
 							</span>

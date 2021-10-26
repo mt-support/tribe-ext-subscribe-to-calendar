@@ -186,8 +186,8 @@ class Hooks extends \tad_DI52_ServiceProvider {
 		];
 
 		$calendar_links = '<div class="tribe-events-cal-links">';
-		$calendar_links .= '<a class="tribe-events-gcal tribe-events-button" href="' . esc_url( $subscribe_to_calendar->get_gcal_uri( $view ) ) . '" title="' . esc_attr( $labels['gcal'] ) . '">+ ' . esc_html( $labels['gcal'] ) . '</a>';
-		$calendar_links .= '<a class="tribe-events-ical tribe-events-button" href="' . esc_url( $subscribe_to_calendar->get_ical_uri( $view ) ) . '" title="' . esc_attr( $labels['ical'] ) . '" >+ ' . esc_html( $labels['ical'] ) . '</a>';
+		$calendar_links .= '<a target="_blank" class="tribe-events-gcal tribe-events-button" href="' . esc_url( $subscribe_to_calendar->get_gcal_uri( $view ) ) . '" title="' . esc_attr( $labels['gcal'] ) . '">+ ' . esc_html( $labels['gcal'] ) . '</a>';
+		$calendar_links .= '<a target="_blank" class="tribe-events-gcal tribe-events-button" href="' . esc_url( $subscribe_to_calendar->get_ical_uri( $view ) ) . '" title="' . esc_attr( $labels['ical'] ) . '">+ ' . esc_html( $labels['ical'] ) . '</a>';
 		$calendar_links .= '</div><!-- .tribe-events-cal-links -->';
 
 		return $calendar_links;
